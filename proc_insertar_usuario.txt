@@ -1,0 +1,16 @@
+drop procedure proc_insertar_usuario
+create PROCEDURE proc_insertar_usuario(
+p_nombre varchar(255), p_apellido1 VARCHAR(255),p_apellido2 varchar(255), p_telefono varchar(255), p_correo varchar(255),
+p_contrasenia varchar(255)
+)
+begin
+
+insert usuario values(DEFAULT,trim(p_nombre), trim(p_apellido1), trim(p_apellido2), trim(p_telefono), trim(p_correo), trim(p_contrasenia), (SELECT ROUND(((999999999 - 100000000) * RAND() + 1), 0)));
+
+end
+
+call proc_insertar_usuario('oMAR','ARANDA','','55301245','OMAR.COM.MX','1234')
+
+SELECT * from usuario
+
+//Recomiendo que la validacion del nombre, el apellido1, telefono y contraseña se validen desde antes desde el php.
