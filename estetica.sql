@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 10/05/2022 21:40:54
+ Date: 10/05/2022 23:40:40
 */
 
 SET NAMES utf8mb4;
@@ -84,15 +84,35 @@ CREATE TABLE `usuario`  (
   `nombre` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `apellido1` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `apellido2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `telefono` int(14) NOT NULL,
+  `telefono` varchar(14) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `contrasenia` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `token` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `token` int(11) NOT NULL,
   PRIMARY KEY (`id_usuarios`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of usuario
 -- ----------------------------
+
+-- ----------------------------
+-- Procedure structure for proc_insertar_usuario
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `proc_insertar_usuario`;
+delimiter ;;
+CREATE PROCEDURE `proc_insertar_usuario`(p_nombre varchar(255), p_apellido1 VARCHAR(255),p_apellido2 varchar(255), p_telefono varchar(255), p_correo varchar(255),
+p_contrasenia varchar(255))
+begin
+if p_nombre='' or p_apellido1='' or p_telefono='' or p_contrasenia=''
+then
+SELECT 'No dejes campos en blanco' as MENSAJE_BD;
+else
+insert usuario values(DEFAULT,trim(p_nombre), trim(p_apellido1), trim(p_apellido2), trim(p_telefono), trim(p_correo), trim(p_contrasenia), (SELECT ROUND(((999999999 - 100000000) * RAND() + 1), 0)));
+SELECT 'SE REGISTRO DE FOMRA ADECUADA EL USUARIO' AS MENSAJE_BD;
+end if;
+
+end
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
