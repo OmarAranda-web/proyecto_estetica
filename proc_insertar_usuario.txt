@@ -4,12 +4,17 @@ p_nombre varchar(255), p_apellido1 VARCHAR(255),p_apellido2 varchar(255), p_tele
 p_contrasenia varchar(255)
 )
 begin
-
+if p_nombre='' or p_apellido1='' or p_telefono='' or p_contrasenia=''
+then
+SELECT 'No dejes campos en blanco' as MENSAJE_BD;
+else
 insert usuario values(DEFAULT,trim(p_nombre), trim(p_apellido1), trim(p_apellido2), trim(p_telefono), trim(p_correo), trim(p_contrasenia), (SELECT ROUND(((999999999 - 100000000) * RAND() + 1), 0)));
+SELECT 'SE REGISTRO DE FOMRA ADECUADA EL USUARIO' AS MENSAJE_BD;
+end if;
 
 end
 
-call proc_insertar_usuario('oMAR','ARANDA','','55301245','OMAR.COM.MX','1234')
+call proc_insertar_usuario('oMAR','Aranda','','55301245','OMAR.COM.MX','1234')
 
 SELECT * from usuario
 
