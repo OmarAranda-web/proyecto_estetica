@@ -1,0 +1,12 @@
+Drop procedure proc_cancelar_cita
+create procedure proc_cancelar_cita(
+p_cita int
+)
+BEGIN
+UPDATE cita set cita.`status`='0' where cita.id_cita=p_cita;
+select 'se cancelo la cita' as Mensaje_BD;
+END
+
+call proc_cancelar_cita(1)
+
+SELECT * from cita
