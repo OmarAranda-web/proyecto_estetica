@@ -1,0 +1,15 @@
+drop PROCEDURE proc_validar_usuario
+create procedure proc_validar_usuario(
+p_usuario varchar(255),
+p_contra varchar(255)
+)
+begin
+if EXISTS(select usuario.id_usuarios from usuario where usuario.nombre=p_usuario and usuario.contrasenia=p_contra)
+then
+	SELECT 'Puedes ingresar' as Mensaje_BD;
+else
+	Select "El usuario o la contraseña son incorrectos" as Mensaje_BD;
+end if;
+end
+
+Call proc_validar_usuario('oMAr','1234');
