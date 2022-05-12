@@ -1,0 +1,19 @@
+drop procedure proc_insertar_servicio
+create procedure proc_insertar_servicio(
+p_nom_servicio varchar(255),
+p_precio_serv float,
+p_tiempo varchar(255)
+)
+begin
+if EXISTS(Select servicio.nombre_servicio from servicio where servicio.nombre_servicio=trim(p_nom_servicio))
+then
+	SELECT 'Ya exite este servicio' as Mensaje_BD;
+else
+	insert servicio VALUES(DEFAULT, trim(p_nom_servicio), trim(p_precio_serv), 1, trim(p_tiempo));
+	Select 'Se inserto nuevo servicio' as Mensaje_BD;
+end if;
+end
+
+call proc_insertar_servicio ('Teñido de cabello', 100, 'Solo los sabados')
+
+select * from servicio
