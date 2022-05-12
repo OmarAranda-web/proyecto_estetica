@@ -1,0 +1,17 @@
+Drop PROCEDURE proc_insertar_local;
+CREATE PROCEDURE proc_insertar_local(
+p_nom_local varchar(255),
+p_direccion_local varchar(255)
+)
+begin
+if EXISTS(Select locales.nombre_local from locales where locales.nombre_local=trim(p_nom_local))
+then
+	SELECT 'Ya existe ese local' as Mensaje_BD;
+else
+	insert locales values(default, trim(p_nom_local),trim(p_direccion_local));
+	SELECT 'Se inserto Local' as Mensaje_BD;
+end if;
+end
+
+call proc_insertar_local('Juan', 'Jilo')
+select * from locales
