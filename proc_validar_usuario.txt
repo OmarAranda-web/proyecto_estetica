@@ -4,9 +4,11 @@ p_usuario varchar(255),
 p_contra varchar(255)
 )
 begin
+declare id_usuario int;
 if EXISTS(select usuario.id_usuarios from usuario where usuario.nombre=p_usuario and usuario.contrasenia=p_contra)
 then
 	SELECT 'Puedes ingresar' as Mensaje_BD;
+	select usuario.id_usuarios into id_usuario from usuario where usuario.nombre=p_usuario and usuario.contrasenia=p_contra;
 else
 	Select "El usuario o la contraseña son incorrectos" as Mensaje_BD;
 end if;

@@ -1,0 +1,8 @@
+DROP procedure proc_editar_servicio
+CREATE procedure proc_editar_servicio (p_idServicio TINYINT, p_nomServicio VARCHAR(255), p_precioServ FLOAT, p_tiempoServ VARCHAR(255), p_estatusServ bit)
+begin
+UPDATE servicio set servicio.nombre_servicio=p_nomServicio, servicio.precio= p_precioServ, servicio.tiempo=p_tiempoServ, servicio.estatus=p_estatusServ WHERE servicio.id_servicio=p_idServicio;
+end;
+
+Call proc_editar_servicio (4,'Corte de Cabello', 90, 'Indefinido',1)
+SELECT * from servicio

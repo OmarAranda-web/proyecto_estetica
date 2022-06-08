@@ -1,0 +1,7 @@
+DROP procedure proc_consul_edita_local
+create PROCEDURE proc_consul_edita_local(p_idLocal TINYINT)
+begin
+	Select locales.id_local,locales.nombre_local, locales.direccion_local, locales.estatus from locales where locales.id_local=p_idLocal;
+end
+ CALL proc_consul_edita_local(3);
+ SELECT * from locales

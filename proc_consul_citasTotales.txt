@@ -1,0 +1,6 @@
+CREATE PROCEDURE proc_consul_citasTotales()
+begin
+	SELECT cita.alias, cita.fecha, cita.hora, cita.total_cita, usuario.nombre, locales.nombre_local from cita inner join usuario on
+cita.idUsuarios = usuario.id_usuarios INNER JOIN locales on locales.id_local=cita.idlocal;
+END
+CALL proc_consul_citasTotales()

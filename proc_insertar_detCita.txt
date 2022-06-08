@@ -1,0 +1,24 @@
+drop PROCEDURE proc_insertar_detCita
+create procedure proc_insertar_detCita (p_idCita BIGINT, p_servicio BIGINT)
+begin
+declare pcatiCita tinyint;
+DECLARE totaciata float;
+Declare actuacita float;
+Select cantidad_cita into pcatiCita from detalle_cita WHERE detalle_cita.id_cita_dcita=p_idCita;
+
+Select total_cita into totaciata from cita where cita.id_cita=p_idCita;
+
+SELECT servicio.precio into actuacita from servicio where servicio.id_servicio = p_servicio;
+
+if EXISTS (Select detalle_cita.id_cita_dcita from detalle_cita where detalle_cita.id_cita_dcita=p_idCita and detalle_cita.id_servicio_dcita=p_servicio)
+then
+	UPDATE detalle_cita set cantidad_cita=(pcaticita+1) where detalle_cita.id_cita_dcita=p_idCita;
+	UPDATE cita set total_cita=(totaciata+actuacita) where cita.id_cita=p_idCita;
+else
+	insert detalle_cita values (DEFAULt,p_idCita, p_servicio, 1);
+	UPDATE cita set total_cita=(totaciata+actuacita) where cita.id_cita=p_idCita;
+end if;
+end
+
+call proc_insertar_detCita (6,3)
+SELECT * from cita

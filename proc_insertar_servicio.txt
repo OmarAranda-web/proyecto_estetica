@@ -14,6 +14,6 @@ else
 end if;
 end
 
-call proc_insertar_servicio ('Teñido de cabello', 100, 'Solo los sabados')
+call proc_insertar_servicio ('Teñido de cabello2', 100, 'Solo los sabados')
 
 select * from servicio

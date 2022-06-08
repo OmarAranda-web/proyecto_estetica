@@ -1,0 +1,5 @@
+CREATE PROCEDURE proc_consul_locales()
+begin
+Select * from locales;
+end
+call proc_consul_locales()

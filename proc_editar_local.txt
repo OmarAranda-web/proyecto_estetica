@@ -1,0 +1,7 @@
+CREATE PROCEDURE proc_editar_local (p_idLocal TINYINT, p_nomLocal VARCHAR(255), p_direccionLocla VARCHAR(255), p_estatus bit)
+begin
+	UPDATE locales set locales.nombre_local=p_nomLocal, locales.direccion_local=p_direccionLocla, locales.estatus=p_estatus
+	WHERE locales.id_local=p_idLocal ;
+end
+call proc_editar_local (4, 'Juanas', 'Mnazanas',1)
+SELECT * from locales

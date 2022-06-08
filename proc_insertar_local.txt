@@ -8,10 +8,10 @@ if EXISTS(Select locales.nombre_local from locales where locales.nombre_local=tr
 then
 	SELECT 'Ya existe ese local' as Mensaje_BD;
 else
-	insert locales values(default, trim(p_nom_local),trim(p_direccion_local));
+	insert locales values(default, trim(p_nom_local),trim(p_direccion_local),1);
 	SELECT 'Se inserto Local' as Mensaje_BD;
 end if;
 end
 
-call proc_insertar_local('Juan', 'Jilo')
+call proc_insertar_local('Juana', 'Jilo')
 select * from locales

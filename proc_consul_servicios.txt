@@ -1,0 +1,6 @@
+CREATE PROCEDURE proc_consul_servicios()
+begin
+Select * from servicio;
+end
+
+call proc_consul_servicios()

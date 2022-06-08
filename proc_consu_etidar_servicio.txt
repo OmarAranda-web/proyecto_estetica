@@ -1,0 +1,6 @@
+drop procedure proc_consu_etidar_servicio
+create procedure proc_consu_etidar_servicio(p_idServicio TINYINT)
+begin
+	select servicio.id_servicio,servicio.nombre_servicio, servicio.precio, servicio.tiempo, servicio.estatus from servicio WHERE servicio.id_servicio=p_idServicio;
+end
+call proc_consu_etidar_servicio(4)

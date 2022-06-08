@@ -4,27 +4,24 @@ p_alias varchar(255),
 p_fecha varchar(255),
 p_hora varchar(255),
 p_usuario int,
-p_servicio varchar(255),
 p_local varchar(255)
 )
 begin
-declare id_servicio int;
 declare id_local int;
 
-select servicio.id_servicio into id_servicio from servicio where servicio.nombre_servicio=p_servicio;
 select locales.id_local into id_local from  locales where locales.nombre_local=p_local;
 
 if EXISTS (SELECT cita.id_cita from cita where cita.fecha=p_fecha and cita.hora=p_hora)
 then
 		SELECT 'FECHA NO DISPONIBLE' AS MENSAJE_BD;
 else
-	insert cita VALUES(default, trim(p_alias), p_fecha, p_hora, '1', p_usuario, id_servicio, id_local);
+	insert cita VALUES(default,trim(p_alias), p_fecha, p_hora, '1', p_usuario, id_local,0);
 	SELECT 'Se hizo la cita' AS MENSAJE_BD;
 end if;
 end
 
-call proc_insertar_cita('Cita Emer', '2022-05-13', '13:00',1,'Corte Sencillo','Loilta');
-
-
+call proc_insertar_cita('Cita Emer', '2022-05-13', '14:00',3,'Juan');
 
 select * from cita
+select locales.id_local,locales.nombre_local From locales
+
